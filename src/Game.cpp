@@ -20,7 +20,7 @@ bool Game::init()
         std::cout << "Failed to load font" << std::endl;
         return false;
     }
-        
+    
     menuText.setFont(font);
     menuText.setString("CRITTER CROSSING \n\n PRESS ENTER TO START");
     menuText.setCharacterSize(40);
@@ -43,7 +43,7 @@ bool Game::init()
     livesText.setFillColor(sf::Color::Green);
 
     passportDateText.setFont(font);
-    passportDateText.setCharacterSize(14);
+    passportDateText.setCharacterSize(28);
     passportDateText.setFillColor(sf::Color::Black);
 
     speechBubbleText.setFont(font);
@@ -64,8 +64,18 @@ bool Game::init()
     if (!wrongBuffer.loadFromFile("Data/Sounds/wrong.mp3")) {
         std::cout << "Failed wrong.mp3" << std::endl;
     }
+    if (!bgMusic.openFromFile("Data/Sounds/music.mp3")) {
+        std::cout << "Failed to load music.mp3" << std::endl;
+        return false;
+    }
 
+    stampSound.setVolume(5.0f);
+    goodSound.setVolume(5.0f);
+    wrongSound.setVolume(5.0f);
 
+    bgMusic.setLoop(true);
+    bgMusic.setVolume(20.0f);
+    bgMusic.play();
     stampSound.setBuffer(stampBuffer);
     goodSound.setBuffer(goodBuffer);
     wrongSound.setBuffer(wrongBuffer);
@@ -209,7 +219,7 @@ void Game::update(float dt)
         sf::Vector2f textPos = t.transformPoint(130, 110);
         passportDateText.setPosition(textPos);
         passportDateText.setFillColor(sf::Color(0, 0, 0, alpha));
-        passportDateText.setCharacterSize(static_cast<unsigned int>(14 * finalScale));
+        passportDateText.setCharacterSize(static_cast<unsigned int>(28 * finalScale));
 
         
         if (isStamped) {

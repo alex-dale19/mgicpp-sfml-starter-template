@@ -68,6 +68,8 @@ class Game
   bool shouldAccept;
   bool playerDecision;
 
+  sf::Music bgMusic;
+
   int score;
   int lives;
   sf::Clock roundClock;
